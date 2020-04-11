@@ -10,7 +10,7 @@ interface ValidatorBase
      * @param $validatorData
      * @return mixed
      */
-    static public function validate($request, $validatorData);
+    static public function make($request, $validatorData);
 
     /**
      * @return mixed
