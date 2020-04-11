@@ -26,7 +26,7 @@ class Validator extends ValidateManager implements ValidatorBase
         return $self;
     }
 
-    private function execute($request, $rules)
+    protected function execute($request, $rules)
     {
 
         $this->status = true;
@@ -63,7 +63,7 @@ class Validator extends ValidateManager implements ValidatorBase
         return $this->status;
     }
 
-    private function validatingOptions($options)
+    protected function validatingOptions($options)
     {
         $this->validateStatus = false;
         switch ($options['checker']) {
