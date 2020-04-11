@@ -1,0 +1,36 @@
+{
+  "name": "plugin-master/validator",
+  "description": "The query builder for WordPress",
+  "license": "MIT",
+  "homepage": "https://github.com/emrancu/PluginMaster-Validator",
+  "support": {
+    "issues": "https://github.com/emrancu/PluginMaster-Validator/issues",
+    "source": "https://github.com/emrancu/PluginMaster-Validator"
+  },
+  "authors": [
+    {
+      "name": "AL EMRAN",
+      "email": "emrancu1@gmail.com"
+    }
+  ],
+  "keywords": [
+    "Http Request validator",
+    "Request Validator for WordPress",
+    "WordPress Request Validator",
+    "PluginMaster Request Validator",
+    "WordPress Plugin Development framework"
+  ],
+  "autoload": {
+    "classmap": [],
+    "psr-4": {
+      "PluginMaster\\Validator\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+
+  }
+
