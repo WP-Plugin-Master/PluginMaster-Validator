@@ -18,7 +18,7 @@ class Validator extends ValidateManager implements ValidatorBase
      * @return Validator
      */
 
-    public static function validate($request, $validatorData)
+    public static function make($request, $validatorData)
     {
         $self = (new Validator());
         $self->message = [];
