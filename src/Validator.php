@@ -2,14 +2,17 @@
 
 namespace PluginMaster\Validator;
 
-use PluginMaster\Validator\utilities\ValidateManager;
 use PluginMaster\Validator\base\ValidatorBase;
+use PluginMaster\Validator\utilities\ValidateManager;
 
 class Validator extends ValidateManager implements ValidatorBase
 {
 
 
     public $status;
+    /**
+     * @var array
+     */
 
     /**
      * for rest route
@@ -20,12 +23,18 @@ class Validator extends ValidateManager implements ValidatorBase
 
     public static function make($request, $validatorData)
     {
-        $self = (new Validator());
+        $self = (new self);
         $self->message = [];
         $self->execute($request, $validatorData);
         return $self;
     }
 
+
+    /**
+     * @param $request
+     * @param $rules
+     * @return bool
+     */
     protected function execute($request, $rules)
     {
 
@@ -63,6 +72,11 @@ class Validator extends ValidateManager implements ValidatorBase
         return $this->status;
     }
 
+
+    /**
+     * @param $options
+     * @return bool
+     */
     protected function validatingOptions($options)
     {
         $this->validateStatus = false;
@@ -100,15 +114,20 @@ class Validator extends ValidateManager implements ValidatorBase
     }
 
 
-
+    /**
+     * @return bool|mixed
+     */
     public function fails()
     {
         return !$this->status ? true : false;
     }
 
 
+    /**
+     * @return mixed
+     */
     public function errors()
     {
-        return self::$message;
+        return $this->message;
     }
 }
