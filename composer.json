@@ -2,10 +2,10 @@
   "name": "plugin-master/validator",
   "description": "The query builder for WordPress",
   "license": "MIT",
-  "homepage": "https://github.com/emrancu/PluginMaster-Validator",
+  "homepage": "https://github.com/WP-Plugin-Master/PluginMaster-Validator",
   "support": {
-    "issues": "https://github.com/emrancu/PluginMaster-Validator/issues",
-    "source": "https://github.com/emrancu/PluginMaster-Validator"
+    "issues": "https://github.com/WP-Plugin-Master/PluginMaster-Validator/issues",
+    "source": "https://github.com/WP-Plugin-Master/PluginMaster-Validator"
   },
   "authors": [
     {
@@ -27,7 +27,9 @@
     }
   },
   "require": {
-    "php": ">=7.0.0"
+    "php": "^7.0|^8.0",
+    "plugin-master/contracts": "^1.0",
+    "plugin-master/request": "^1.0"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
