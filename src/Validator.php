@@ -3,10 +3,10 @@
 namespace PluginMaster\Validator;
 
 use PluginMaster\Request\Request;
-use PluginMaster\Contracts\Validator\Validator as ValidatorContract;
+use PluginMaster\Contracts\Validator\ValidatorInterface ;
 use PluginMaster\Validator\utilities\ValidateManager;
 
-class Validator extends ValidateManager implements ValidatorContract
+class Validator extends ValidateManager implements ValidatorInterface
 {
 
     /**
