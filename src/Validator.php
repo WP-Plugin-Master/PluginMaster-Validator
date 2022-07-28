@@ -3,7 +3,7 @@
 namespace PluginMaster\Validator;
 
 use PluginMaster\Request\Request;
-use PluginMaster\Contracts\Validator\ValidatorInterface ;
+use PluginMaster\Contracts\Validator\ValidatorInterface;
 use PluginMaster\Validator\utilities\ValidateManager;
 
 class Validator extends ValidateManager implements ValidatorInterface
@@ -23,47 +23,49 @@ class Validator extends ValidateManager implements ValidatorInterface
      * @return Validator
      */
 
-    public static function make( Request $request, $validatorData ) {
-        static::$instance           = static::$instance ?? (new self);
+    public static function make(Request $request, $validatorData): self
+    {
+        static::$instance = static::$instance ?? (new self);
         static::$instance->messages = [];
-        static::$instance->execute( $request, $validatorData );
+        static::$instance->execute($request, $validatorData);
         return static::$instance;
     }
 
 
     /**
-     * @param $request
-     * @param $rules
+     * @param  Request  $request
+     * @param  array  $rules
      * @return bool
      */
-    protected function execute( Request $request, array $rules ): bool {
-
+    protected function execute(Request $request, array $rules): bool
+    {
         $this->status = true;
 
-        foreach ( $rules as $key => $option ) {
+        foreach ($rules as $key => $option) {
             $options = [
-                "checkers"  => $option,
-                "data"      => $request->$key,
+                "checkers" => $option,
+                "data" => $request->$key,
                 "fieldName" => $key
             ];
 
-            $valueAsArray = explode( '|', $options['checkers'] );
+            $valueAsArray = explode('|', $options['checkers']);
 
-            foreach ( $valueAsArray as $k => $value ) {
-
+            foreach ($valueAsArray as $k => $value) {
                 $validateOption = [
-                    "data"      => $options['data'],
+                    "data" => $options['data'],
                     "fieldName" => $options['fieldName'],
                 ];
 
-                $split                     = explode( ':', $value );
+                $split = explode(':', $value);
                 $validateOption['checker'] = $split[0];
-                if ( count( $split ) > 1 ) $validateOption['limit'] = $split[1];
+                if (count($split) > 1) {
+                    $validateOption['limit'] = $split[1];
+                }
 
 
-                $check = $this->validatingOptions( $validateOption );
+                $check = $this->validatingOptions($validateOption);
 
-                if ( !$check ) {
+                if (!$check) {
                     $this->status = false;
                 }
             }
@@ -74,38 +76,39 @@ class Validator extends ValidateManager implements ValidatorInterface
 
 
     /**
-     * @param $options
+     * @param  array  $options
      * @return bool
      */
-    private function validatingOptions( array $options ): bool {
+    private function validatingOptions(array $options): bool
+    {
         $this->validateStatus = false;
-        switch ( $options['checker'] ) {
+        switch ($options['checker']) {
             case 'required':
-                $this->checkRequired( $options );
+                $this->checkRequired($options);
                 break;
             case 'number':
-                $this->checkNumber( $options );
+                $this->checkNumber($options);
                 break;
             case 'floatNumber':
-                $this->checkFloatNumber( $options );
+                $this->checkFloatNumber($options);
                 break;
             case 'noNumber':
-                $this->checkNoNumber( $options );
+                $this->checkNoNumber($options);
                 break;
             case 'letter':
-                $this->checkLetter( $options );
+                $this->checkLetter($options);
                 break;
             case 'noSpecialChar':
-                $this->checkNoSpecialChar( $options );
+                $this->checkNoSpecialChar($options);
                 break;
             case 'limit':
-                $this->checkLimit( $options );
+                $this->checkLimit($options);
                 break;
             case 'wordLimit':
-                $this->checkWordLimit( $options );
+                $this->checkWordLimit($options);
                 break;
             case 'email':
-                $this->checkEmail( $options );
+                $this->checkEmail($options);
                 break;
         }
 
@@ -114,9 +117,10 @@ class Validator extends ValidateManager implements ValidatorInterface
 
 
     /**
-     * @return bool|mixed
+     * @return bool
      */
-    public function fails(): bool {
+    public function fails(): bool
+    {
         return !$this->status;
     }
 
@@ -124,7 +128,8 @@ class Validator extends ValidateManager implements ValidatorInterface
     /**
      * @return mixed
      */
-    public function errors(): array {
+    public function errors(): array
+    {
         return $this->messages;
     }
 }
