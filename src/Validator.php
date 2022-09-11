@@ -18,7 +18,7 @@ class Validator extends ValidateManager implements ValidatorInterface
 
     /**
      * for rest route
-     * @param $request
+     * @param Request $request
      * @param $validatorData
      * @return Validator
      */
@@ -33,8 +33,8 @@ class Validator extends ValidateManager implements ValidatorInterface
 
 
     /**
-     * @param  Request  $request
-     * @param  array  $rules
+     * @param Request $request
+     * @param array $rules
      * @return bool
      */
     protected function execute(Request $request, array $rules): bool
@@ -48,7 +48,7 @@ class Validator extends ValidateManager implements ValidatorInterface
                 "fieldName" => $key
             ];
 
-            $valueAsArray = explode('|', $options['checkers']);
+            $valueAsArray = is_array($options['checkers']) ? $options['checkers'] : explode('|', $options['checkers']);
 
             foreach ($valueAsArray as $k => $value) {
                 $validateOption = [
@@ -76,7 +76,7 @@ class Validator extends ValidateManager implements ValidatorInterface
 
 
     /**
-     * @param  array  $options
+     * @param array $options
      * @return bool
      */
     private function validatingOptions(array $options): bool
